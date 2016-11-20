@@ -7,5 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Gregwar\\Captcha\\' => array($vendorDir . '/gregwar/captcha'),
-    'App\\' => array($baseDir . '/classes'),
+    'App\\' => array($baseDir . '/app/classes'),
 );
