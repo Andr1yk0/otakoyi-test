@@ -4,8 +4,8 @@ namespace App\core;
 use Gregwar\Captcha\CaptchaBuilder;
 
 class App {
-    private static $local_configs = [];
-    private static $common_configs = [];
+    private static $local_configs = array();
+    private static $common_configs = array();
     static $user = null;
     public function __construct(){
         self::$common_configs = include BASE_PATH.'/app/configs/common.php';
@@ -59,6 +59,4 @@ class App {
     static function getClientBrowserName(){
         return get_browser()->browser;
     }
-
-
 }
