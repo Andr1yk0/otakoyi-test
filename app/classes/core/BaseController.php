@@ -13,7 +13,7 @@ class BaseController {
     protected $view;
     protected $request;
     public $validation_rules;
-    public $access_rules = [];
+    public $access_rules = array();
     function __construct(Request $request){
         $this->view = new View();
         $this->request = $request;

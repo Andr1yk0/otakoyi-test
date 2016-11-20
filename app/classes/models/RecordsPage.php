@@ -25,7 +25,7 @@ class RecordsPage {
     public $sorting_by;
     public $sorting_order;
     public $offset = 0;
-    public $records_on_page = [];
+    public $records_on_page = array();
     public $records_amount;
 
     function __construct($sorting_column_index=2, $sorting_order_index=1, $offset=0){

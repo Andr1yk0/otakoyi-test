@@ -11,7 +11,7 @@ namespace App\core;
 
 class Validator {
     public $errors=[];
-    public $error_msg = [];
+    public $error_msg = array();
     function __construct(){
         $this->error_massages = include BASE_PATH."/app/configs/validation.php";
     }
@@ -36,7 +36,7 @@ class Validator {
     }
 
     public function getFailedRules(array $rules_array, $value){
-        $failed = [];
+        $failed = array();
         foreach($rules_array as $rule_name){
             if(method_exists($this,$rule_name)){
                 if(!$this->$rule_name($value)){
