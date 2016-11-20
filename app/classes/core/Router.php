@@ -11,7 +11,7 @@ use App\controllers\ErrorController;
 
 class Router {
     private $request;
-    private $controller, $action, $params=[], $configs=[];
+    private $controller, $action, $params=array(), $configs=array();
 
     function __construct($configs){
         $this->request = new Request();
@@ -40,15 +40,16 @@ class Router {
 
     function callAction(){
         $controller_path = $this->configs['controller_namespace'].$this->controller;
+        $error_controller = new ErrorController($this->request);
         if(method_exists($controller_path,$this->action)){
             $controller_obj = new $controller_path($this->request);
             if(!$this->isActionAllowed($controller_obj)){
-                (new ErrorController($this->request))->noRights();
+                $error_controller->noRights();
             }else{
                 call_user_func_array(array($controller_obj,$this->action),$this->params);
             }
         }else{
-            (new ErrorController($this->request))->page404();
+            $error_controller->page404();
         }
     }
 

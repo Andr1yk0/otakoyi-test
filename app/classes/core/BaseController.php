@@ -28,7 +28,7 @@ class BaseController {
      * @param array $rules
      * @return Validator
      */
-    function validate(array $data, array $rules=[]){
+    function validate(array $data, array $rules=array()){
         $validator = new Validator();
         if(empty($rules)){
             $rules = $this->validation_rules;

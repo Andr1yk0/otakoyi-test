@@ -15,12 +15,12 @@ class View {
         $this->layout = views_path().'layouts/main.php';
     }
 
-    public function make($path, array $data=[]){
+    public function make($path, array $data=array()){
         $content = $this->render($path, $data);
         require_once $this->layout;
     }
 
-    public function makePartial($path,array $data=[])
+    public function makePartial($path,array $data=array())
     {
         return $this->render($path, $data);
     }

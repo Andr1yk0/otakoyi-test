@@ -1,12 +1,12 @@
 <?php
-return [
-    'router'=>[
+return array(
+    'router'=>array(
         'default_controller'=>'RecordsController',
         'default_action'=>'index',
         'controller_namespace'=>'App\\controllers\\'
-    ],
-    'login'=>[
+    ),
+    'login'=>array(
         'email'=>'admin@gmail.com',
         'password'=>'12345'
-    ]
-];
+    )
+);

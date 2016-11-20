@@ -1,11 +1,11 @@
 <?php
-return[
-    'mode'=>'dev',
+return array(
+    'mode' => 'dev',
 
-    'db'=>[
-        'host'=>'localhost',
-        'db_name'=>'otakoyi_test',
-        'user'=>'root',
-        'password'=>''
-    ],
-];
+    'db' => array(
+        'host' => 'localhost',
+        'db_name' => 'otakoyi_test',
+        'user' => 'root',
+        'password' => ''
+    ),
+);

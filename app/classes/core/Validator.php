@@ -10,7 +10,7 @@ namespace App\core;
 
 
 class Validator {
-    public $errors=[];
+    public $errors=array();
     public $error_msg = array();
     function __construct(){
         $this->error_massages = include BASE_PATH."/app/configs/validation.php";

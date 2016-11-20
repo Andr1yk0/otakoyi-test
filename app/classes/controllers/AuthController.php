@@ -14,10 +14,10 @@ use App\core\BaseController;
 use App\core\Session;
 
 class AuthController extends BaseController{
-    public $access_rules = [
-        'onlyAdmin'=>['logout'],
-        'onlyGuest'=>['login']
-    ];
+    public $access_rules = array(
+        'onlyAdmin'=>array('logout'),
+        'onlyGuest'=>array('login')
+    );
     public function login(){
         $login_data = App::getCommonConfigs('login');
         $input = $this->request->post();

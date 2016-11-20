@@ -17,27 +17,27 @@ use App\models\RecordsPage;
 class RecordsController extends BaseController
 {
 
-    public $access_rules = [
-        'onlyAdmin' => ['edit','delete','update']
-    ];
-    public $validation_rules = [
+    public $access_rules = array(
+        'onlyAdmin' => array('edit','delete','update')
+    );
+    public $validation_rules = array(
         'captcha' => 'captcha|required',
         'email' => 'email|required',
         'name' => 'required'
-    ];
+    );
 
     function index()
     {
         if (!empty($_POST)) {
             $page = new RecordsPage($_POST['column'], $_POST['sorting_order'], $_POST['offset']);
-            echo $this->view->makePartial('elements/_table.php', [
+            echo $this->view->makePartial('elements/_table.php', array(
                 'page' => $page
-            ]);
+            ));
         } else {
             $page = new RecordsPage();
-            $this->view->make('main/index.php', [
+            $this->view->make('main/index.php', array(
                 'page' => $page
-            ]);
+            ));
         }
     }
 
@@ -51,24 +51,24 @@ class RecordsController extends BaseController
         $input_data = $this->request->post();
         $validator = $this->validate($input_data);
         if (!$validator->passed()) {
-            echo json_encode(['errors' => $validator->errors]);
+            echo json_encode(array('errors' => $validator->errors));
         } else {
             unset($input_data['captcha']);
             $input_data['browser'] = App::getClientBrowserName();
             $input_data['ip'] = App::getClientIp();
             Db::table('records')->insert($input_data);
-            echo $this->view->makePartial('elements/_table.php', [
+            echo $this->view->makePartial('elements/_table.php', array(
                 'page' => new RecordsPage(),
-            ]);
+            ));
         }
     }
 
     function edit($id)
     {
         $record = Db::table('records')->where('id', '=', $id)->getOne();
-        echo $this->view->makePartial('forms/record_form.php', [
+        echo $this->view->makePartial('forms/record_form.php', array(
             'record' => $record
-        ]);
+        ));
     }
 
     function delete($id)
@@ -81,12 +81,12 @@ class RecordsController extends BaseController
         $input_data = $this->request->post();
         $validator = $this->validate($input_data);
         if (!$validator->passed()) {
-            echo json_encode(['errors' => $validator->errors]);
+            echo json_encode(array('errors' => $validator->errors));
         } else {
             Db::table('records')->where('id', '=', $id)->update($input_data);
-            echo $this->view->makePartial('elements/_table.php', [
+            echo $this->view->makePartial('elements/_table.php', array(
                 'page' => new RecordsPage(),
-            ]);
+            ));
         }
     }
 }

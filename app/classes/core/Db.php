@@ -82,14 +82,14 @@ class Db {
         return $this;
     }
 
-    function get(array $cols=['*']){
+    function get(array $cols=array('*')){
         $cols = implode(', ', $cols);
         $this->query = "select $cols from $this->table"." ".$this->query;
         $stmt = self::$pdo->query($this->query);
         return $stmt->fetchAll();
     }
 
-    function getOne(array $cols=['*']){
+    function getOne(array $cols=array('*')){
         $res = $this->get($cols);
         return $res[0];
     }

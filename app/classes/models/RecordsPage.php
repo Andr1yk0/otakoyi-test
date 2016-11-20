@@ -11,15 +11,15 @@ namespace App\models;
 use App\core\Db;
 
 class RecordsPage {
-    public $sorting_columns = [
-        ['label'=>"Ім'я", 'name'=>'name'],
-        ['label'=>'Електронна адреса', 'name'=>'email'],
-        ['label'=>'Дата створення', 'name'=>'created_at']
-    ];
-    public $sorting_orders = [
-        ['label'=>'Зростання','name'=>'ASC'],
-        ['label'=>'Спадання','name'=>'DESC'],
-    ];
+    public $sorting_columns = array(
+        array('label'=>"Ім'я", 'name'=>'name'),
+        array('label'=>'Електронна адреса', 'name'=>'email'),
+        array('label'=>'Дата створення', 'name'=>'created_at')
+    );
+    public $sorting_orders = array(
+        array('label'=>'Зростання','name'=>'ASC'),
+        array('label'=>'Спадання','name'=>'DESC'),
+    );
 
     public $records_per_page = 5;
     public $sorting_by;
@@ -39,6 +39,6 @@ class RecordsPage {
         $this->offset = $offset;
         $this->records_on_page = Db::table('records')->orderBy($this->sorting_by['name'],$this->sorting_order['name'])
             ->limit($this->records_per_page,$this->offset)->get();
-        $this->records_amount = Db::table('records')->getOne(['count(*) as amount'])->amount;
+        $this->records_amount = Db::table('records')->getOne(array('count(*) as amount'))->amount;
     }
 }
