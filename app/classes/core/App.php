@@ -10,6 +10,7 @@ class App {
     public function __construct(){
         self::$common_configs = include BASE_PATH.'/app/configs/common.php';
         self::$local_configs = include BASE_PATH."/app/configs/local.php";
+        $this->setAppOptions();
     }
 
     public function start(){
@@ -56,7 +57,35 @@ class App {
         return $ip;
     }
 
+    private function setAppOptions(){
+        if($this->getLocalConfigs('debug')){
+            ini_set('display_errors','On');
+        }else{
+            ini_set('display_errors','Off');
+        }
+    }
+
+    /**
+     *
+     * source http://stackoverflow.com/questions/2257597/reliable-user-browser-detection-with-php
+     * @return string
+     */
     static function getClientBrowserName(){
-        return get_browser()->browser;
+        if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== FALSE)
+            return 'Internet explorer';
+        elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Trident') !== FALSE) //For Supporting IE 11
+            return 'Internet explorer';
+        elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'OPR') !== FALSE)
+            return "Opera";
+        elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Firefox') !== FALSE)
+            return 'Firefox';
+        elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') !== FALSE)
+            return 'Google Chrome';
+        elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') !== FALSE)
+            return "Safari";
+        elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera Mini') !== FALSE)
+            return "Opera Mini";
+        else
+            return 'Не визначено';
     }
 }

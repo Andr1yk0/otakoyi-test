@@ -4,7 +4,6 @@
 (function(){
     var $content = $('.content');
     var $loading = $('.content_wrap .loading');
-
     addEventListeners();
     function getResponseErrors(value){
         console.log(value);

@@ -1,6 +1,6 @@
 <?php
 return array(
-    'mode' => 'dev',
+    'debug' => true,
 
     'db' => array(
         'host' => 'localhost',

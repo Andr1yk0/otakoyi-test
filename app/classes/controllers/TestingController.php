@@ -19,6 +19,7 @@ class TestingController extends BaseController
 {
     function index()
     {
-        var_dump($this->request);
+        var_dump($_SERVER['HTTP_USER_AGENT']);
+        var_dump(App::getClientBrowserName());
     }
 }
