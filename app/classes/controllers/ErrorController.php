@@ -13,10 +13,10 @@ use App\core\BaseController;
 
 class ErrorController extends BaseController {
     function page404(){
-        $this->view->make('errors/404.php');
+        $this->view->make('errors/404.tpl');
     }
 
     function noRights(){
-        $this->view->make('errors/no_rights.php');
+        $this->view->make('errors/no_rights.tpl');
     }
 }

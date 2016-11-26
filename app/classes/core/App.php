@@ -35,7 +35,7 @@ class App {
     static function buildCaptcha(){
         $captcha = new CaptchaBuilder();
         $captcha->build();
-        Session::add('captcha_phrase',$captcha->getPhrase());
+        Session::set('captcha_phrase',$captcha->getPhrase());
         return $captcha;
     }
 

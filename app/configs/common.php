@@ -8,5 +8,13 @@ return array(
     'login'=>array(
         'email'=>'admin@gmail.com',
         'password'=>'12345'
+    ),
+
+    'validation_massages'=>array(
+        'default'=>"Не вірно введені дані",
+        'required'=>"Поле обов'язкове для заповнення",
+        'email'=>"Електронна адреса введана не вірно",
+        'max_length'=>"Максимально допустима кількість символів для поля {val}",
+        'length'=>"Необхідна кількість символів {val}"
     )
 );

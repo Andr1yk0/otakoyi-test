@@ -37,7 +37,4 @@ class BaseController {
         return $validator;
     }
 
-    function checkAccess(){
-
-    }
 }

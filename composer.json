@@ -13,6 +13,7 @@
     }
   },
   "require": {
-    "gregwar/captcha": "1.*"
+    "gregwar/captcha": "1.*",
+    "smarty/smarty": "~3.1"
   }
 }

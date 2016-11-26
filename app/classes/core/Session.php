@@ -14,7 +14,7 @@ class Session {
         session_start();
     }
 
-    static function add($name, $value){
+    static function set($name, $value){
         $_SESSION[$name]=$value;
     }
 

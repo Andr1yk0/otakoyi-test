@@ -22,7 +22,7 @@ class AuthController extends BaseController{
         $login_data = App::getCommonConfigs('login');
         $input = $this->request->post();
         if($login_data['email']===$input['email']&&$login_data['password']===$input['password'])
-            Session::add('user_id',1);
+            Session::set('user_id',1);
         $this->goHome();
 
     }

@@ -8,31 +8,43 @@
 namespace App;
 
 use App\core\App;
+use Smarty;
 
-class View {
+
+class View extends Smarty{
     public $layout;
     function __construct(){
-        $this->layout = views_path().'layouts/main.php';
+        parent::__construct();
+        $this->template_dir = BASE_PATH.'/app/views/templates/';
+        $this->compile_dir = BASE_PATH.'/app/views/templates_c/';
+        $this->debugging = true;
+        $this->layout = 'layouts/main.tpl';
     }
 
-    public function make($path, array $data=array()){
-        $content = $this->render($path, $data);
-        require_once $this->layout;
+    public function make($tpl, array $data=array()){
+        $this->assignTemplateVariables($data);
+        $this->assign('content',$tpl);
+        $this->display($this->layout);
+
     }
 
-    public function makePartial($path,array $data=array())
-    {
-        return $this->render($path, $data);
-    }
-
-    private function render($path, array $data){
-        if(!empty($data)){
-            extract($data);
+    private function assignTemplateVariables($data){
+        if(!empty($data)) {
+            foreach ($data as $var => $val) {
+                $this->assign($var, $val);
+            }
         }
-        ob_start();
-        require views_path().$path;
-        $content = ob_get_contents();
-        ob_clean();
-        return $content;
+        $this->setGlobalTemplateVariables();
     }
+
+    public function makePartial($tpl,array $data=array())
+    {
+        $this->assignTemplateVariables($data);
+        return $this->fetch($tpl);
+    }
+
+    private function setGlobalTemplateVariables(){
+        $this->assign('is_admin',App::isAdmin());
+    }
+
 }

@@ -21,21 +21,22 @@ class RecordsController extends BaseController
         'onlyAdmin' => array('edit','delete','update')
     );
     public $validation_rules = array(
-        'captcha' => 'captcha|required',
-        'email' => 'email|required',
-        'name' => 'required'
+        'captcha' => 'captcha|required|length:5',
+        'email' => 'email|required|max_length:255',
+        'name' => 'required|max_length:50',
+        
     );
 
     function index()
     {
         if (!empty($_POST)) {
             $page = new RecordsPage($_POST['column'], $_POST['sorting_order'], $_POST['offset']);
-            echo $this->view->makePartial('elements/_table.php', array(
+            echo $this->view->makePartial('elements/_table.tpl', array(
                 'page' => $page
             ));
         } else {
             $page = new RecordsPage();
-            $this->view->make('main/index.php', array(
+            $this->view->make('main/index.tpl', array(
                 'page' => $page
             ));
         }
@@ -43,7 +44,7 @@ class RecordsController extends BaseController
 
     function create()
     {
-        echo $this->view->makePartial('forms/record_form.php');
+        echo $this->view->makePartial('forms/record_form.tpl');
     }
 
     function store()
@@ -51,13 +52,13 @@ class RecordsController extends BaseController
         $input_data = $this->request->post();
         $validator = $this->validate($input_data);
         if (!$validator->passed()) {
-            echo json_encode(array('errors' => $validator->errors));
+            echo json_encode(array('errors' => $validator->getValidationResult()));
         } else {
             unset($input_data['captcha']);
             $input_data['browser'] = App::getClientBrowserName();
             $input_data['ip'] = App::getClientIp();
             Db::table('records')->insert($input_data);
-            echo $this->view->makePartial('elements/_table.php', array(
+            echo $this->view->makePartial('elements/_table.tpl', array(
                 'page' => new RecordsPage(),
             ));
         }
@@ -66,7 +67,7 @@ class RecordsController extends BaseController
     function edit($id)
     {
         $record = Db::table('records')->where('id', '=', $id)->getOne();
-        echo $this->view->makePartial('forms/record_form.php', array(
+        echo $this->view->makePartial('forms/record_form.tpl', array(
             'record' => $record
         ));
     }

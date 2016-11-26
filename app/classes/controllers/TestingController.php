@@ -19,7 +19,7 @@ class TestingController extends BaseController
 {
     function index()
     {
-        var_dump($_SERVER['HTTP_USER_AGENT']);
-        var_dump(App::getClientBrowserName());
+        $cont = new RecordsController(new Request());
+        $res = $cont->validate(array('captcha'=>'sllldf'));
     }
 }
